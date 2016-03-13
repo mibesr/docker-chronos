@@ -1,8 +1,8 @@
 FROM xiaocao/mesos
 
-ENV CHRONOS_VERSION=2.5.0-0.1.20160223054243.ubuntu1404
+ENV VERSION_CHRONOS=2.5.0-0.1.20160223054243.ubuntu1404
 
-RUN apt-get update && apt-get -y install chronos=$CHRONOS_VERSION curl
+RUN apt-get update && apt-get -y install chronos=$VERSION_CHRONOS curl
 RUN rm -rf /etc/mesos
 RUN rm -rf /etc/chronos/conf
 
