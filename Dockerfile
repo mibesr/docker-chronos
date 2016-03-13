@@ -1,4 +1,4 @@
-FROM mesosphere/mesos:0.27.2-2.0.15.ubuntu1404
+FROM xiaocao/mesos
 
 ENV CHRONOS_VERSION=2.5.0-0.1.20160223054243.ubuntu1404
 
