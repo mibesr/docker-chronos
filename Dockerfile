@@ -1,11 +1,18 @@
 FROM xiaocao/mesos
 
-ENV VERSION_CHRONOS=2.5.0-0.1.20160223054243.ubuntu1404
+ENV VERSION_CHRONOS 2.5.0
 
-RUN apt-get update && apt-get -y install chronos=$VERSION_CHRONOS curl
-RUN rm -rf /etc/mesos
-RUN rm -rf /etc/chronos/conf
+RUN apt-get update && \
+    apt-get install -y maven node npm default-jdk scala curl git && \
+    ln -s /usr/bin/nodejs /usr/bin/node
 
-EXPOSE 4400
+RUN git clone https://github.com/mesos/chronos.git /chronos
 
-CMD ["/usr/bin/chronos", "run_jar", "--http_port", "4400", "--zk_hosts",  "localhost:2181", "--master", "zk://localhost:2181"]
+WORKDIR /chronos
+
+RUN mvn clean package && \
+    apt-get remove -y --auto-remove maven node npm git
+
+EXPOSE 8080
+
+ENTRYPOINT ["bin/start-chronos.bash"]
